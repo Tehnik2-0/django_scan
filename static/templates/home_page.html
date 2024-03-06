@@ -1,0 +1,23 @@
+{% load static %}
+{% csrf_token %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+<body>
+    <button onclick="window.location='{% url 'download' %}'">Загрузить</button>
+        <br/>
+        <button onclick="window.location='{% url 'search' %}'">Поиск</button>
+        <br/>
+        <!-- Выводим уже созданные записи -->
+        {% for s in object_list %}
+            <p>№ {{ s.task_id }}</p>
+            <p>Дата: {{ s.date }}</p>
+            <p>Загружено / отсканировано файлов: {{ s.len_files }} / {{ s.progress }}</p>
+        <br/>
+            {% for f in s.scans %}
+                <p><a href="{{ f.file }}">{{ f.title }}</a></p>
+                <p><img src="{{ f.cover }}" ></p>
+                <p>{{ f.object_builbing }}</p>
+                {% endfor %}
+            <br/>
+        {% endfor %}
+        <br/>
+</body>

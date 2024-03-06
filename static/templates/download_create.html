@@ -1,0 +1,9 @@
+<!-- Устанавливаем multipart/form-data -->
+<button onclick="window.location='{% url 'home' %}'">На главную</button>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- Выводим каждое поле формы в отдельном параграфе -->
+    {{ form.as_p }}
+    <button type="submit">Загрузка</button>
+</form>
