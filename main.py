@@ -115,10 +115,21 @@ def crop_image(element, pageObj):
 def convert_to_images(input_file, name_image):
     images = convert_from_path(input_file)
     image = images[0]
+    image.save(name_image, 'PNG')
+    return name_image
+
+
+def create_image(pageObj, name_image):
+    cropped_pdf_writer = PyPDF2.PdfWriter()
+    cropped_pdf_writer.add_page(pageObj)
+    # Save the cropped PDF to a new file
+    with open('cropped_image.pdf', 'wb') as cropped_pdf_file:
+        cropped_pdf_writer.write(cropped_pdf_file)
+    images = convert_from_path('cropped_image.pdf')
+    image = images[0]
     name_image = name_image[5:-3] + 'png'
     output_file = IMAGE_ROOT / name_image
     image.save(output_file, 'PNG')
-    return output_file
 
 
 # Create a function to read text from images
@@ -131,12 +142,32 @@ def image_to_text(image_path):
     text = pytesseract.image_to_string(img, lang='rus',  config=tessdata_dir_config)
     return text
 
+
+def reset_eof_of_pdf_return_stream(pdf_path):
+    # find the line position of the EOF
+    global actual_line
+    with open(pdf_path, 'rb') as p:
+        txt = (p.readlines())
+    for i, x in enumerate(txt[::-1]):
+        if b'%%EOF' in x:
+            actual_line = len(txt)-i
+            break
+
+    # return the list up to that point
+    return txt[:actual_line]
+
+
+def write_fix_pdf(pdf_path):
+    pdf_stream_in = reset_eof_of_pdf_return_stream(pdf_path)
+    with open(pdf_path, "wb") as f:
+        f.writelines(pdf_stream_in)
 # Find the PDF path
 
 
 def start(pdf_path, name_image):
 
     # Create a pdf file object
+    write_fix_pdf(pdf_path)
     pdfFileObj = open(pdf_path, 'rb')
     # Create a pdf reader object
     pdfReaded = PyPDF2.PdfReader(pdfFileObj)
@@ -146,10 +177,9 @@ def start(pdf_path, name_image):
     text_per_page = {}
     # Create a boolean variable for image detection
     image_flag = False
-
+    create_image(pdfReaded.pages[0], name_image)
     # We extract the pages from the PDF
     for pagenum, page in enumerate(extract_pages(pdf_path)):
-
         # Initialize the variables needed for the text extraction from the page
         pageObj = pdfReaded.pages[pagenum]
         page_text = []
@@ -181,6 +211,7 @@ def start(pdf_path, name_image):
         page_elements = [(element.y1, element) for element in page._objs]
         # Sort all the element as they appear in the page
         page_elements.sort(key=lambda a: a[0], reverse=True)
+
 
 
         # Find the elements that composed a page
@@ -220,7 +251,7 @@ def start(pdf_path, name_image):
                     # Crop the image from PDF
                     crop_image(element, pageObj)
                     # Convert the croped pdf to image
-                    path_to_file = convert_to_images('cropped_image.pdf', name_image)
+                    path_to_file = convert_to_images('cropped_image.pdf', 'cropped_image.png')
                     # Extract the text from image
                     image_text = image_to_text(path_to_file)
                     text_from_images.append(image_text)
@@ -243,12 +274,13 @@ def start(pdf_path, name_image):
     # Delete the additional files created if image is detected
     if image_flag:
         os.remove('cropped_image.pdf')
+        os.remove('cropped_image.png')
 
     # Display the content of the page
     result = ''
     for key, value in text_per_page.items():
         result += str(value[4])
-    return result, path_to_file
+    return result.replace('\\n', ''), path_to_file
 
 
 # def directory_in_path(path):

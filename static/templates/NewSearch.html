@@ -7,13 +7,16 @@
             <button onclick="window.location='{% url 'download' %}'">Загрузить</button>
         </div>
         <div class="B">
-            <button onclick="window.location='{% url 'download' %}'">Загрузить</button>
+            <button onclick="window.location='{% url 'search' %}'">Поиск</button>
         </div>
         <div class="C">
             {% for s in object_list %}
-            <p>№ {{ s.task_id }}</p>
-            <p>Дата: {{ s.date }}</p>
-            <p>Загружено / отсканировано файлов: {{ s.len_files }} / {{ s.progress }}</p>
+                <div class="container_task">
+                    <div class="D"><p>№ {{ s.task_id }}</p></div>
+
+                    <p>Дата: {{ s.date }}</p>
+                    <p>Загружено / отсканировано файлов: {{ s.len_files }} / {{ s.progress }}</p>
+                </div>
         <br/>
             {% for f in s.scans %}
                 <p><a href="{{ f.file }}">{{ f.title }}</a></p>

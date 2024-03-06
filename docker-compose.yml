@@ -1,0 +1,11 @@
+version: '3.12'
+
+
+  services:
+    redis:
+      image: redis:latest
+    celery:
+      build: .
+      command: python -m celery -A djangoProject worker -l info -P solo
+      depends_on:
+        - redis

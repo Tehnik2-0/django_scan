@@ -27,10 +27,15 @@
 .B { grid-area: 1 / 3 / 3 / 5; }
 .C { grid-column: 1 / 5;
      grid-row: 4 / 6}
-.D { grid-area: o; }
-.E { grid-area: n; }
 
 .container {
     display: grid;
     grid-template: repeat(3, 1fr) / repeat(5, 1fr) ;
 }
+
+.container_task {
+    display: grid;
+    grid-template-columns: 1fr 100px 2fr;
+    grid-template: repeat(1, 1fr) / repeat(5, 1fr) ;
+}
+.D { grid-area: 1 / 1 / 2 / 1; }

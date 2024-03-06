@@ -25,9 +25,10 @@ SECRET_KEY = 'django-insecure-3i2lv%0_jw)xjt5q^3x470t1#iq%4ln40j_0r*u1h0gxj&bq-_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.28', '127.0.0.1', 'localhost']
 
-
+MAX_UPLOAD_SIZE = "5242880"
+DATA_UPLOAD_MAX_NUMBER_FILES = 10240
 # Application definition
 
 INSTALLED_APPS = [
@@ -108,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 

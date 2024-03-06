@@ -12,10 +12,10 @@ class Scan(models.Model):
 
 
 class Download(models.Model):
-    object_builbing = models.ForeignKey('ObjectBuilbing', on_delete=models.CASCADE, null=False)
-    file = models.FileField(upload_to='scan/', null=True, blank=True)
+    object_builbing = models.ForeignKey('ObjectBuilbing', on_delete=models.CASCADE, null=False, verbose_name='Объект строительства')
+    file = models.FileField(upload_to='scan/', null=True, blank=True, verbose_name='Файл')
     task = models.ForeignKey('Task', on_delete=models.CASCADE, null=True)
-    date_building = models.ForeignKey('DateBuilding', on_delete=models.CASCADE, null=False)
+    date_building = models.ForeignKey('DateBuilding', on_delete=models.CASCADE, null=False, verbose_name='Дата строительства')
 
 
 class Task(models.Model):
