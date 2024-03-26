@@ -3,7 +3,7 @@ from django.db import models
 
 class Scan(models.Model):
     title = models.CharField(max_length=150)
-    cover = models.ImageField(upload_to='images/')
+    cover = models.ImageField(upload_to='images/', max_length=2000)
     file = models.ForeignKey('Download', on_delete=models.CASCADE, null=False)
     text = models.TextField(null=True)
 
@@ -19,6 +19,7 @@ class Download(models.Model):
 
 
 class Task(models.Model):
+    celery_task_id = models.CharField(max_length=256, null=True)
     len_files = models.IntegerField()
     date = models.DateTimeField(auto_now_add=True)
     progress = models.IntegerField(default=0)

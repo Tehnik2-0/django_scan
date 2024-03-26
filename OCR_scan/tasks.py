@@ -1,11 +1,13 @@
 import functools
 # python -m celery -A djangoProject worker -l info -P solo
 from celery import shared_task
+from celery_progress.backend import ProgressRecorder
 from django.db import transaction
 from django.db.models import F
 from django.db.transaction import atomic
 
 from OCR_scan.models import Task, Download, Scan
+from djangoProject.celery import app
 from djangoProject.settings import PROJECT_ROOT, MEDIA_ROOT
 from main import start
 
@@ -38,21 +40,17 @@ def add_db_task(id_task, count):
     Task.objects.filter(id=id_task).update(progress=count)
 
 
-@custom_celery_task(max_retries=5)
-def add_db_scan(title, file, text, cover):
-    s = Scan.objects.create(title=title, file=file, text=text, cover=cover)
-    s.save()
-
-
-@custom_celery_task(max_retries=5)
-def recognition_scan(id_task):
+@app.task(bind=True)
+def recognition_scan(self, id_task):
     files = Download.objects.filter(task=id_task)
-    count = 1
+    count = 0
+    progress_recorder = ProgressRecorder(self)
     for file in files:
         name_image = file.file.name
 
         url = 'images' + '\\' + name_image[5:-3] + 'png'
         text = start(pdf_path=file.file.path, name_image=name_image)
-        add_db_scan(title=file.file.name, file=file, text=text, cover=url)
-        add_db_task(id_task, count)
+        s = Scan.objects.create(title=file.file.name, file=file, text=text, cover=url)
+        s.save()
+        progress_recorder.set_progress(count, len(files))
         count += 1

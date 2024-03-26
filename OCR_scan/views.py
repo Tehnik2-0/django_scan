@@ -2,6 +2,7 @@ from django.db import transaction
 from django.shortcuts import redirect
 from django.views.generic import FormView, ListView, CreateView
 
+from djangoProject.celery import app
 from .forms import DownloadForm
 from .models import Scan, Download, Task, ObjectBuilbing, DateBuilding
 from .tasks import recognition_scan
@@ -68,7 +69,9 @@ class DownloadCreate(FormView):
             obj = self.model.objects.create(file=f, object_builbing=object_builbing, task=task,
                                             date_building=date_building)
         with transaction.atomic():
-            recognition_scan.delay(task.pk)
+            t = recognition_scan.delay(task.pk)
+            task.celery_task_id = t.task_id
+            task.save()
         return redirect(self.get_success_url())
 
 
@@ -112,6 +115,15 @@ class HomeView(ListView):
             count = 0
             files = []
             scans = Scan.objects.filter(file__task=task)
+            status = ''
+            if task.celery_task_id:
+                if app.AsyncResult(id=task.celery_task_id).info:
+                    status = app.AsyncResult(id=task.celery_task_id).info.get('current')
+                else:
+                    status = task.len_files
+            else:
+                status = task.len_files
+
             for s in scans:
                 count_files = 0
                 if s.cover:
@@ -127,7 +139,7 @@ class HomeView(ListView):
             context['object_list'].append({'task_id': task.pk,
                                            'len_files': task.len_files,
                                            'date': task.date,
-                                           'progress': task.progress,
+                                           'progress': status,
                                            'scans': files
                                            })
 

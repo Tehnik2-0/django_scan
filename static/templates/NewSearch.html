@@ -1,31 +1,385 @@
 {% load static %}
 {% csrf_token %}
-<link href="{% static 'css/style.css' %}" rel="stylesheet">
-<body>
-    <div class="container">
-        <div class="A">
-            <button onclick="window.location='{% url 'download' %}'">Загрузить</button>
-        </div>
-        <div class="B">
-            <button onclick="window.location='{% url 'search' %}'">Поиск</button>
-        </div>
-        <div class="C">
-            {% for s in object_list %}
-                <div class="container_task">
-                    <div class="D"><p>№ {{ s.task_id }}</p></div>
 
-                    <p>Дата: {{ s.date }}</p>
-                    <p>Загружено / отсканировано файлов: {{ s.len_files }} / {{ s.progress }}</p>
-                </div>
-        <br/>
-            {% for f in s.scans %}
-                <p><a href="{{ f.file }}">{{ f.title }}</a></p>
-                <p><img src="{{ f.cover }}" width="100" height="100"></p>
-                <p>{{ f.object_builbing }}</p>
-                {% endfor %}
-            <br/>
-        {% endfor %}
-        <br/>
-        </div>
-    </div>
-</body>
+<div style="display: inline-block; width: 1920px" data-ignore="used only for top most containter width">
+<div class="document-management-dashboard">
+<div class="specialized-management-section">
+<div class="document-analysis-section">
+<div class="passport-search-container">
+<img src="assets/img_201_5_ad5fba.png" class="image-container3" />
+</div>
+<p class="specialized-heading-style1">СПЕЦИАЛИЗИРОВАННОЕ СТРОИТЕЛЬНО-МОНТАЖНОЕ УПРАВЛЕНИЕ № 399</p>
+</div>
+<p class="document-analysis-panel">Штанный сайт для анализа и загрузки документов</p>
+</div>
+<div class="data-search-dashboard">
+<div class="data-visualization-container">
+<div class="database-info-section">
+<div class="passport-search-container7">
+<div class="passport-search-container3">
+<div class="passport-search-container">
+<p class="passport-search-heading1">Поиск паспартов</p>
+<p class="passport-search-heading">База данных паспартов обурудования</p>
+</div>
+<p class="scan-database-description">Создана база данных сканированных паспартов для быстрого поиска выборочных слов</p>
+</div>
+<div class="scanned-passport-database-info">
+<img src="assets/img_201_18_b1d407.svg" class="image-container" />
+</div>
+</div>
+<p class="main-heading-text-style">Общая статистика</p>
+</div>
+<div class="passport-search-container4">
+<div class="passport-search-container2">
+<p class="passport-search-title">Поиск паспартов</p>
+<div class="passport-search-container1">
+<div class="vertical-centered-card">
+<div class="vertical-centered-card">
+<div class="passport-search-container5">
+<p class="passport-search-label1">-</p>
+<p class="passport-search-label2">Поиск паспартов</p>
+</div>
+<div class="passport-search-container6">
+<p class="passport-search-label1">-</p>
+<p class="passport-search-label2">Поиск паспартов</p>
+</div>
+</div>
+<!-- PLACEHOLDER - Button Component detected here. Go to "React Code" via right click menu to see code generated -->
+</div>
+<div class="passport-search-container">
+<img src="assets/img_201_35_831b1f.svg" class="image-container2" />
+</div>
+</div>
+</div>
+<div class="blue-gradient-container">
+<p class="passport-search-heading2">Загрузить файлы</p>
+<div class="file-upload-section">
+<div class="passport-search-section">
+<div class="vertical-centered-card">
+<div class="passport-search-container5">
+<p class="passport-search-label">-</p>
+<p class="passport-search-text-style">Поиск паспартов</p>
+</div>
+<div class="passport-search-container6">
+<p class="passport-search-label">-</p>
+<p class="passport-search-text-style">Поиск паспартов</p>
+</div>
+</div>
+<!-- PLACEHOLDER - Button Component detected here. Go to "React Code" via right click menu to see code generated -->
+</div>
+<div class="passport-search-container">
+<img src="assets/img_201_50_abe937.svg" class="image-container1" />
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="dashboard-stats-container">
+<div class="passport-card-container">
+<p class="passport-label">Паспартов</p>
+<div class="price-container">
+<p class="price-text-with-increment-btn">10 000</p>
+<div class="amount-button-container">
+<!-- PLACEHOLDER - Button Component detected here. Go to "React Code" via right click menu to see code generated -->
+</div>
+</div>
+</div>
+<div class="passport-card-container">
+<p class="passport-label">Страниц</p>
+<div class="page-counter-section">
+<p class="price-text-with-increment-btn">120 538</p>
+<!-- PLACEHOLDER - Button Component detected here. Go to "React Code" via right click menu to see code generated -->
+</div>
+</div>
+<div class="passport-card-container">
+<p class="passport-label">Отсканировано</p>
+<div class="page-counter-section">
+<p class="price-text-with-increment-btn">50/10 000</p>
+<!-- PLACEHOLDER - Button Component detected here. Go to "React Code" via right click menu to see code generated -->
+</div>
+</div>
+<div class="passport-card-container">
+<p class="passport-label">Загружено</p>
+<div class="page-counter-section">
+<p class="price-text-with-increment-btn">100%</p>
+<!-- PLACEHOLDER - Button Component detected here. Go to "React Code" via right click menu to see code generated -->
+</div>
+</div>
+</div>
+</div>
+<div class="passport-table-container">
+<p class="passport-table-heading">Таблица паспартов</p>
+<p class="passport-table-title">Обработанные файлы</p>
+<div class="passport-table-header">
+<div class="horizontal-flex-container">
+<div class="blue-gradient-panel">
+<p class="newer-text-styler">Новее</p>
+</div>
+<div class="flex-row-with-gap">
+<p class="historical-text-display-style">Старые</p>
+<p class="time-label">За все время</p>
+</div>
+</div>
+<!-- PLACEHOLDER - Input Component detected here. Go to "React Code" via right click menu to see code generated -->
+</div>
+</div>
+<div class="vertical-flex-container">
+<div class="button-container">
+<!-- PLACEHOLDER - Button Component detected here. Go to "React Code" via right click menu to see code generated -->
+<div class="vertical-divider"></div>
+</div>
+<div class="monthly-calendar-container">
+<p class="month-label-text-style">Янв</p>
+<p class="month-label-text-style">Фев</p>
+<p class="month-label-text-style">Март</p>
+<p class="month-label-text-style">Апр</p>
+<p class="month-label-text-style">Май</p>
+<p class="month-label-text-style">Июнь</p>
+<p class="month-label-text-style">Июль</p>
+<p class="month-label-text-style">Авг</p>
+<p class="month-label-text-style">Сент</p>
+<p class="month-label-text-style">Окт</p>
+<p class="month-label-text-style">Нояб</p>
+<p class="month-label-text-style">Дек</p>
+</div>
+</div>
+<div class="document-list-view">
+<div class="flex-row-container">
+<div class="info-card">
+<p class="card-label-text-style">Имя</p>
+<div class="svg-container">
+<svg viewBox="0 0 10 10" x="0" y="0" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="Vector_5" data-node-id="201:210" d="M1.00005,2.82325l4,4l4,-4" stroke="#151515" xmlns="http://www.w3.org/2000/svg" /></svg>
+</div>
+</div>
+<div class="flex-row-with-padding">
+<p class="card-label-text-style">Дата</p>
+<div class="svg-container">...</div>
+</div>
+<div class="quantity-container">
+<p class="card-label-text-style">Количество</p>
+<div class="svg-container">...</div>
+</div>
+<div class="document-loader-container">
+<p class="card-label-text-style">Загрузка</p>
+<div class="svg-container">...</div>
+</div>
+<p class="status-label">Статус</p>
+<div class="document-info-panel">
+<p class="document-title-text-style">Документы</p>
+</div>
+</div>
+<div class="passport-search-container7">
+<div class="vertical-flex-container">
+<!-- Repeated elements detected. These are rendered using loops & conditions in the React tab -->
+<div class="document-card-view">
+<p class="document-info-text">#122455</p>
+<p class="document-date-style">06.03.2024</p>
+<p class="equipment-count-text-container">10 000</p>
+<div class="progress-bar-container">
+<div class="passport-search-container">
+<img class="boxy-image" src="assets/img_201_221_1a06e5.svg" />
+</div>
+<p class="completion-percentage-style">55%</p>
+</div>
+<div class="card-button-container">
+<!-- PLACEHOLDER - Button Component detected here. Go to "React Code" via right click menu to see code generated -->
+</div>
+<div class="document-status-container">
+<p class="status-text-display-style">Открыть</p>
+</div>
+</div>
+<div class="document-card-view">
+<p class="document-info-text">#121466</p>
+<p class="document-date-style">01.03.2024</p>
+<p class="equipment-count-text-container">111 152</p>
+<div class="progress-bar-container">
+<div class="passport-search-container">
+<img class="boxy-image" src="assets/img_201_226_26ad9f.svg" />
+</div>
+<p class="completion-percentage-style">37%</p>
+</div>
+<div class="card-button-container">
+<!-- PLACEHOLDER - Button Component detected here. Go to "React Code" via right click menu to see code generated -->
+</div>
+<div class="document-status-container">
+<p class="status-text-display-style">Открыть</p>
+</div>
+</div>
+<div class="document-card-view">
+<p class="document-info-text">#422155</p>
+<p class="document-date-style">07.03.2024</p>
+<p class="equipment-count-text-container">1 000 000</p>
+<div class="progress-bar-container">
+<div class="passport-search-container">
+<img class="boxy-image" src="assets/img_201_231_4a0f73.svg" />
+</div>
+<p class="completion-percentage-style">100%</p>
+</div>
+<div class="card-button-container">
+<!-- PLACEHOLDER - Button Component detected here. Go to "React Code" via right click menu to see code generated -->
+</div>
+<div class="document-status-container">
+<p class="status-text-display-style">Открыть</p>
+</div>
+</div>
+<div class="document-card-view">
+<p class="document-info-text">#123456</p>
+<p class="document-date-style">11.02.2024</p>
+<p class="equipment-count-text-container">425 000</p>
+<div class="progress-bar-container">
+<div class="passport-search-container">
+<img class="boxy-image" src="assets/img_201_237_907dd7.svg" />
+</div>
+<p class="completion-percentage-style">0%</p>
+</div>
+<div class="card-button-container">
+<!-- PLACEHOLDER - Button Component detected here. Go to "React Code" via right click menu to see code generated -->
+</div>
+<div class="document-status-container">
+<p class="status-text-display-style">Открыть</p>
+</div>
+</div>
+<div class="document-card-view">
+<p class="document-info-text">#175612</p>
+<p class="document-date-style">22.03.2024</p>
+<p class="equipment-count-text-container">10</p>
+<div class="progress-bar-container">
+<div class="passport-search-container">
+<img class="boxy-image" src="assets/img_201_241_eedbde.svg" />
+</div>
+<p class="completion-percentage-style">10%</p>
+</div>
+<div class="card-button-container">
+<!-- PLACEHOLDER - Button Component detected here. Go to "React Code" via right click menu to see code generated -->
+</div>
+<div class="document-status-container">
+<p class="status-text-display-style">Открыть</p>
+</div>
+</div>
+<div class="document-card-view">
+<p class="document-info-text">#781235</p>
+<p class="document-date-style">12.12.2023</p>
+<p class="equipment-count-text-container">154 225</p>
+<div class="progress-bar-container">
+<div class="passport-search-container">
+<img class="boxy-image" src="assets/img_201_246_90836e.svg" />
+</div>
+<p class="completion-percentage-style">65%</p>
+</div>
+<div class="card-button-container">
+<!-- PLACEHOLDER - Button Component detected here. Go to "React Code" via right click menu to see code generated -->
+</div>
+<div class="document-status-container">
+<p class="status-text-display-style">Открыть</p>
+</div>
+</div>
+<div class="document-card-view">
+<p class="document-info-text">#124562</p>
+<p class="document-date-style">18.11.2023</p>
+<p class="equipment-count-text-container">666</p>
+<div class="progress-bar-container">
+<div class="passport-search-container">
+<img class="boxy-image" src="assets/img_201_251_acb1c2.svg" />
+</div>
+<p class="completion-percentage-style">24%</p>
+</div>
+<div class="card-button-container">
+<!-- PLACEHOLDER - Button Component detected here. Go to "React Code" via right click menu to see code generated -->
+</div>
+<div class="document-status-container">
+<p class="status-text-display-style">Открыть</p>
+</div>
+</div>
+<div class="document-card-view">
+<p class="document-info-text">#145682</p>
+<p class="document-date-style">25.06.2023</p>
+<p class="equipment-count-text-container">952</p>
+<div class="progress-bar-container">
+<div class="passport-search-container">
+<img class="boxy-image" src="assets/img_201_256_7450a2.svg" />
+</div>
+<p class="completion-percentage-style">32%</p>
+</div>
+<div class="card-button-container">
+<!-- PLACEHOLDER - Button Component detected here. Go to "React Code" via right click menu to see code generated -->
+</div>
+<div class="document-status-container">
+<p class="status-text-display-style">Открыть</p>
+</div>
+</div>
+<div class="document-card-view">
+<p class="document-info-text">#114523</p>
+<p class="document-date-style">22.02.2024</p>
+<p class="equipment-count-text-container">1 236</p>
+<div class="progress-bar-container">
+<div class="passport-search-container">
+<img class="boxy-image" src="assets/img_201_261_2e223f.svg" />
+</div>
+<p class="completion-percentage-style">15%</p>
+</div>
+<div class="card-button-container">
+<!-- PLACEHOLDER - Button Component detected here. Go to "React Code" via right click menu to see code generated -->
+</div>
+<div class="document-status-container">
+<p class="status-text-display-style">Открыть</p>
+</div>
+</div>
+<div class="document-card-view">
+<p class="document-info-text">#145156</p>
+<p class="document-date-style">17.01.2024</p>
+<p class="equipment-count-text-container">10 000 555</p>
+<div class="progress-bar-container">
+<div class="passport-search-container">
+<img class="boxy-image" src="assets/img_201_266_a2eb51.svg" />
+</div>
+<p class="completion-percentage-style">78%</p>
+</div>
+<div class="card-button-container">
+<!-- PLACEHOLDER - Button Component detected here. Go to "React Code" via right click menu to see code generated -->
+</div>
+<div class="document-status-container">
+<p class="status-text-display-style">Открыть</p>
+</div>
+</div>
+</div>
+<div class="flex-counter-widget">
+<div class="svg-container1">...</div>
+<span class="highlighted-badge">1</span>
+<div class="svg-container2">
+<svg viewBox="0 0 32 32" x="0" y="0" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="Rectangle 11" data-node-id="201:93" d="M1.50005,2.10005h29v27.8h-29z" stroke="#DDDCDE" stroke-width="1.20833" xmlns="http://www.w3.org/2000/svg" /></svg>
+</div>
+<div class="svg-container2">
+<svg viewBox="0 0 32 32" x="0" y="0" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="Rectangle 13" data-node-id="201:96" d="M1.50005,2.10005h29v27.8h-29z" stroke="#DDDCDE" stroke-width="1.20833" xmlns="http://www.w3.org/2000/svg" /></svg>
+</div>
+<div class="svg-container3">
+<svg viewBox="0 0 32 32" x="0" y="0" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="Rectangle 14" data-node-id="201:97" d="M1.50005,2.10005h29v27.8h-29z" stroke="#DDDCDE" stroke-width="1.20833" xmlns="http://www.w3.org/2000/svg" /></svg>
+</div>
+<span class="highlighted-text-badge">99</span>
+<div class="svg-container4">
+<svg viewBox="0 0 32 32" x="0" y="0" fill="none" xmlns="http://www.w3.org/2000/svg"><rect id="Rectangle 17" data-node-id="201:95" x="1.5000500000001011" y="2.1041999999997643" width="29" height="27.7917" rx="3.39583" stroke="#DDDCDE" stroke-width="1.20833" xmlns="http://www.w3.org/2000/svg" /></svg>
+</div>
+</div>
+</div>
+</div>
+<div class="document-statistics-container">
+<div class="document-stats-container">
+<div class="passport-search-container">
+<p class="documentation-stats-heading documentation-stats-display-style"><span>Сайт создан, чтобы вести </span><span class="documentation-stats-heading documentation-stats-display-style">статистику документации</span></p>
+<p class="documentation-stats-summary">Создана база данных сканированных паспартов для быстрого поиска выборочных слов</p>
+</div>
+<div class="specialized-heading">
+<p class="specialized-heading-style">СПЕЦИАЛИЗИРОВАННОЕ СТРОИТЕЛЬНО-МОНТАЖНОЕ УПРАВЛЕНИЕ № 399</p>
+</div>
+</div>
+<div class="stat-card">
+<img src="assets/img_201_283_e61677.svg" class="image-container4" />
+</div>
+</div>
+</div>
+</div>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700" />
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500" />
